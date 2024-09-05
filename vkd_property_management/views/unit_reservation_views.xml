@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <record id="view_unit_reservation_tree" model="ir.ui.view">
+        <field name="name">unit.reservation.view.tree</field>
+        <field name="model">unit.reservation</field>
+        <field name="arch" type="xml">
+            <tree string="Unit Reservations">
+                <field name="reservation_id"/>
+                <field name="sale_agent_id"/>
+                <field name="apartment_details_id"/>
+                <field name="floor_details_id"/>
+                <field name="unit_details_id"/>
+                <field name="reservation_status" widget="badge"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_unit_reservation_form" model="ir.ui.view">
+        <field name="name">unit.reservation.view.form</field>
+        <field name="model">unit.reservation</field>
+        <field name="arch" type="xml">
+            <form string="Unit Reservation">
+                <header>
+                    <button name="action_unit_hold" type="object" string="Hold" class="oe_highlight"
+                            invisible="reservation_status in ['hold', 'reserved', 'rented', 'sold', 'cancel']"/>
+                    <button name="action_unit_reserve" type="object" string="Set Reserved" class="oe_highlight"
+                            invisible="reservation_status in ['reserved', 'cancel', 'draft', 'rented', 'sold']"/>
+                    <button name="action_set_rented" type="object" string="Set Rented" class="oe_highlight"
+                            invisible="reservation_status in ['rented', 'cancel', 'draft', 'sold']"/>
+                    <button name="action_set_sold" type="object" string="Set Sold" class="oe_highlight"
+                            invisible="reservation_status in ['sold', 'cancel', 'draft', 'rented']"/>
+                    <button name="action_set_cancel" type="object" string="Cancel" class="oe_highlight"
+                            invisible="reservation_status in ['cancel', 'draft']"/>
+                    <button name="action_set_reset" type="object" string="Reset to Draft" class="oe_highlight"
+                            invisible="reservation_status in ['reset', 'hold', 'reserved', 'rented', 'sold', 'draft']"/>
+                    <field name="reservation_status" widget='statusbar'
+                           statusbar_visible="draft,hold,reserved,rented,sold,expired,cancel"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="reservation_id"/>
+                            <field name="sale_agent_id"/>
+                            <field name="apartment_details_id" domain="[('is_active', '=', True)]"/>
+                            <field name="floor_details_id" domain="[('apartment_details_id', '=', apartment_details_id)]"/>
+                            <field name="unit_details_id"
+                                   domain="[('unit_status', '=', 'available'), ('floor_details_id', '=', floor_details_id)]"/>
+                        </group>
+                        <group>
+                            <field name="reserved_date"/>
+                            <field name="expiration_date"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_unit_reservation" model="ir.actions.act_window">
+        <field name="name">Sale Agent Details</field>
+        <field name="res_model">unit.reservation</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_unit_reservation"
+              name="Unit Reservations"
+              parent="menu_unit_management"
+              action="action_unit_reservation"
+              sequence="2"/>
+
+</odoo>

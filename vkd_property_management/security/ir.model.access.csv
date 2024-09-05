@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_apartment_details,access_apartment_details,model_apartment_details,base.group_user,1,1,1,1
+access_floor_details,access_floor_details,model_floor_details,base.group_user,1,1,1,1
+access_unit_details,access_unit_details,model_unit_details,base.group_user,1,1,1,1
+access_sale_agent,access_sale_agent,model_sale_agent,base.group_user,1,1,1,1
+access_unit_reservation,access_unit_reservation,model_unit_reservation,base.group_user,1,1,1,1
+access_tower_details,access_tower_details,model_tower_details,base.group_user,1,1,1,1
+access_sale_agent_categories,access_sale_agent_categories,model_sale_agent_categories,base.group_user,1,1,1,1

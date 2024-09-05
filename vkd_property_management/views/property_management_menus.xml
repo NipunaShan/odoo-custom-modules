@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+
+    <!--main menu-->
+    <menuitem id="property_management_root"
+              name="Property Management"
+              sequence="1"
+              web_icon="vkd_property_management,static/description/icon.png"/>
+
+    <menuitem id="menu_apartment_management"
+              name="Apartment"
+              parent="property_management_root"
+              sequence="1"/>
+
+    <menuitem id="menu_floor_management"
+              name="Floor"
+              parent="property_management_root"
+              sequence="2"/>
+
+    <menuitem id="menu_unit_management"
+              name="Unit"
+              parent="property_management_root"
+              sequence="3"/>
+
+    <menuitem id="menu_sale_agent"
+              name="Sale Agent"
+              parent="property_management_root"
+              sequence="4"/>
+
+</odoo>
